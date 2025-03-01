@@ -5,7 +5,8 @@ __license__   = 'GPL 3'
 __copyright__ = '2017, Leonardo Brondani Schenkel <leonardo@schenkel.net>'
 __docformat__ = 'restructuredtext en'
 
-import urllib
+from six.moves import urllib
+
 from calibre.gui2.store import StorePlugin
 from calibre.gui2.store.search_result import SearchResult
 
@@ -21,7 +22,7 @@ class BokonStore(GenericStore):
     words_drm_unlocked = ['vattenmärkt', 'unprotected']
 
     def quote(self, query):
-        return urllib.quote(query)
+        return urllib.parse.quote(query)
 
     def find_search_results(self, doc):
         return xpath(doc, '//*', 'book ')
