@@ -34,6 +34,13 @@ class BokonStore(GenericStore):
         r.author      = text(node, './/*', 'book__authorname')
         r.price       = text(node, './/*', 'book__price')
         r.cover_url   = text(node, './/*', 'book__cover', '//img/@src')
+
+        # If result mentions "can send to Kindle", it indicates a DRM-free EPUB:
+        kindle = text(node, './/*', 'book__infoitem_attr_kindle')
+        if kindle and kindle.startswith('Kan skickas'):
+            r.formats = 'EPUB'
+            r.drm     = SearchResult.DRM_UNLOCKED
+
         return r
 
     def parse_book_details(self, node):
