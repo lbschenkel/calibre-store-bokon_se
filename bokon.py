@@ -40,7 +40,7 @@ class BokonStore(GenericStore):
         r = SearchResult()
         r.title     = text(node, './/*[@itemprop="name"]')
         r.author    = text(node, './/*', 'bookdetails__authorname')
-        r.price     = text(node, './/*', 'bookdetails__price')
+        r.price     = text(node, './/*', 'bookdetails__price_type_current bookdetails__price_value')
         r.cover_url = text(node, './/img[@itemprop="image"]', '', '/@src')
         r.formats   = text(node, './/*', 'book_info__format', '/span[2]/text()')
         r.drm       = text(node, './/*', 'book_info__drm', '/span[2]/text()')
